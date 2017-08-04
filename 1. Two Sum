@@ -8,6 +8,8 @@ Given nums = [2, 7, 11, 15], target = 9,
 Because nums[0] + nums[1] = 2 + 7 = 9,
 return [0, 1].
 
+题目意思：返回数组中相加等于target的两个数的下标。
+思路：简单的方法就是从第一个元素开始每两个数都相加，结果与target比较，相同则把两个数的下标返回。
 
 class Solution {
 public:
