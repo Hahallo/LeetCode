@@ -1,0 +1,34 @@
+Reverse digits of an integer.
+将一个整数倒转。
+
+Example1: x = 123, return 321
+Example2: x = -123, return -321
+
+Note:
+The input is assumed to be a 32-bit signed integer. Your function should return 0 when the reversed integer overflows.
+溢出的时候返回0
+
+解题思路：32位整数的范围为：-2147483648到2147 483 647，可以先用长整形保存反转的值，再确定是否在范围之内。
+
+class Solution {
+public:
+    int reverse(int x) {
+        	int y[10];
+	int i = 0;
+	long long x2=0;
+	while (x != 0)
+	{
+		y[i++] = x % 10;
+		x /= 10;
+	}
+
+	for (int j = 0;j < i;j++)
+	{
+		x2 = x2* 10+y[j];
+	}
+	if (x2 > 2147483647 || x2 < -2147483648)
+		return 0;
+	else
+	return (int)x2;
+    }
+};
