@@ -1,0 +1,30 @@
+Given a sorted array, remove the duplicates in place such that each element appear only once and return the new length.
+给你一个排好序的数组，去除重复的数字，是每个元素只出现一次，返回新长度。
+Do not allocate extra space for another array, you must do this in place with constant memory.
+不要为另一个数组开辟另外的空间，你必须用常量内存实现。
+For example,
+Given input array nums = [1,1,2],
+
+Your function should return length = 2, with the first two elements of nums being 1 and 2 respectively.
+It doesn't matter what you leave beyond the new length.
+
+解题思路：从头往后遍历，每次遍历都将元素与之前一个元素比较，相同则继续，不同则，将length+1,并数组的第n+1个元素为该元素。
+
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        int size=nums.size();
+        int length=1;
+        if(size==0||size==1)
+            return size;
+        for(int i=1;i<size;i++)
+        {
+            if(nums[i]!=nums[i-1])
+            {
+                nums[length]=nums[i];
+                length++;
+            }        
+        }
+        return length;
+    }
+};
