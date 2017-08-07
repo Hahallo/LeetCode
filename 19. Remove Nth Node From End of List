@@ -1,0 +1,47 @@
+Given a linked list, remove the nth node from the end of list and return its head.
+给你一个链表，去除从最后一个节点起的第n个节点，返回链表头。
+For example,
+
+   Given linked list: 1->2->3->4->5, and n = 2.
+
+   After removing the second node from the end, the linked list becomes 1->2->3->5.
+Note:
+Given n will always be valid.
+Try to do this in one pass.
+
+题目思路：普通的做法就是先遍历到链表的尾部，得到链表的长度，然后从尾部再掉头n步。另一种方法是用两个指针，
+一个first一个last，首先让first和last之间间隔n-1个节点，之后同时走，直到last到达尾部。
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode* first=new ListNode(0);
+        ListNode* last=head;
+        first->next=head;
+        for(int i=0;i<n-1;i++)
+        {
+            last=last->next;
+        }
+        if(last->next==NULL)
+        {  
+            ListNode*b=first->next->next;
+            return b;
+        }
+        while(last->next!=NULL)
+        {
+            last=last->next;
+            first=first->next;
+        }
+        ListNode*b=first->next->next;
+        first->next=b;
+        return head;
+    }
+};
