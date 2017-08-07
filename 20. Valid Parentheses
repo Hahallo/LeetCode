@@ -1,0 +1,53 @@
+Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+给你一个字符串，串中只包含'(', ')', '{', '}', '[' and ']',判断字符串是不是有效的。
+The brackets must close in the correct order, "()" and "()[]{}" are all valid but "(]" and "([)]" are not.
+
+解题思路：使用栈，将开口向右的符号如‘（’，直接压入，开口向左的，判断栈顶元素是否是其对应的右开口。是则弹出栈顶元素。否则压入，
+最后栈是空的，则说明字符串有效。
+
+class Solution {
+public:
+    bool isValid(string s) {
+        	stack<int>a;
+	int size = s.length();
+	int s1;
+	for (int i=0;i < size;i++)
+	{
+		if (s[i] == '{')
+		{
+			s1 = -1;
+		}
+		else if (s[i] == '}')
+		{
+			s1 = 1;
+		}
+		else if (s[i] == '[')
+		{
+			s1 = -2;
+		}
+
+		else if (s[i] == ']')
+		{
+			s1 = 2;
+		}
+
+		else if (s[i] == '(')
+		{
+			s1 = -3;
+		}
+
+		else if (s[i] == ')')
+		{
+			s1 = 3;
+		}
+		if (!a.empty()&&s1>0&&s1+a.top()==0)
+			a.pop();
+		else
+			a.push(s1);
+	}
+	if (a.empty())
+	return true;
+	else
+		return false;
+    }
+};
