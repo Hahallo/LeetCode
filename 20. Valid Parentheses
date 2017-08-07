@@ -5,6 +5,24 @@ The brackets must close in the correct order, "()" and "()[]{}" are all valid bu
 解题思路：使用栈，将开口向右的符号如‘（’，直接压入，开口向左的，判断栈顶元素是否是其对应的右开口。是则弹出栈顶元素。否则压入，
 最后栈是空的，则说明字符串有效。
 
+刚刚看了一个很好的方法，直接贴代码：
+public boolean isValid(String s) {
+	Stack<Character> stack = new Stack<Character>();
+	//如果先判断长度是不是奇数，速度还能更快
+	for (char c : s.toCharArray()) {
+		if (c == '(')
+			stack.push(')');
+		else if (c == '{')
+			stack.push('}');
+		else if (c == '[')
+			stack.push(']');
+		else if (stack.isEmpty() || stack.pop() != c)
+			return false;
+	}
+	return stack.isEmpty();
+}
+
+我的方法;
 class Solution {
 public:
     bool isValid(string s) {
