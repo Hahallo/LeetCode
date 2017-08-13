@@ -1,0 +1,44 @@
+Merge two sorted linked lists and return it as a new list. The new list should be
+made by splicing together the nodes of the first two lists.
+合并两个从小到大排好序的链表并且返回一个新的表。
+
+解题思路：两个表不会同时到达结尾，所以当一个表到达结尾之后，跳出循环，直接将没有到达结尾的链表连在新链表后
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        ListNode *head=new ListNode(0);
+        ListNode *last=head;
+        while(l1!=NULL&&l2!=NULL)
+        {
+            
+            if(l1->val<l2->val)
+            {
+                last->next=l1;
+                l1=l1->next;
+            }
+            else
+            {
+                last->next=l2;
+                l2=l2->next;
+            }
+             last=last->next;
+        }
+        if(l1==NULL)
+        {
+            last->next=l2;
+        }
+        else
+        {
+            last->next=l1;
+        }
+        return head->next;
+    }
+};
