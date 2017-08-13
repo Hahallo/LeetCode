@@ -1,0 +1,40 @@
+Given n non-negative integers a1, a2, ..., an, where each represents a point at coordinate (i, ai). n vertical lines are drawn such that the two endpoints of line i is at (i, ai) and (i, 0). Find two lines, which together with x-axis forms a container, such that the container contains the most water.
+
+Note: You may not slant the container and n is at least 2.
+题目的意思就是，有n个在x轴上方的点，每个点做一条长度为ai的垂直x轴的线段，求两线段加x轴组成的水桶装水最大面积
+
+解题思路：我用的是暴力破解，从第一条线开始往后，算出后面所有线和它组成的水桶的面积最大值，如果后面的线比之前的最长的线短，就跳过它。
+事实证明该方法时间复杂度比较高
+
+更好的方法是：前后两个指针，向中间移动，移动前算出两条线组成的面积，然后比较两条线的长短，短的向中间移动一步。直到相遇。
+理解：首先在两端的时候，底边最长，因为面积是由底边长和最短竖边决定，所以需要将较短的竖边向中间移动一位，因为这条较短的边限制了面积的大小，而较大的边决定
+了面积的上限，所以通过较短的边向中间移动来达到这个上限面积，当找到一条比较长边还长的边时，此时较小边移动。
+方法代码待补充：
+
+我的方法：
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        int size=height.size();
+        int maxarea=0;
+        int maxheight=height[0];
+        int area=0;
+        for(int i=0;i<size;i++)
+        {
+            if(height[i]<maxheight)continue;
+            else
+            {
+                maxheight=height[i];
+            }
+            for(int j=i+1;j<size;j++)
+            {
+                area=height[i]>height[j]?height[j]*(j-i):height[i]*(j-i);
+                if(area>maxarea)
+                {
+                    maxarea=area;
+                }
+            }
+        }
+        return maxarea;
+    }
+};
