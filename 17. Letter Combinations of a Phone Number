@@ -1,0 +1,38 @@
+Given a digit string, return all possible letter combinations that the number could represent.
+给你一个数字字符串，返回所有可能的这些数字可以表示的字符组合
+A mapping of digit to letters (just like on the telephone buttons) is given below.
+九宫格手机上的按键
+
+
+Input:Digit string "23"
+Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
+
+解题思路：直接上代码
+
+class Solution {
+public:
+    vector<string> letterCombinations(string digits) {
+        string a[10]={"0","1","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+        vector<string>res;
+        int size=digits.length();
+        if(size==0)//如果为空字符串就直接返回
+            return res;
+        res.push_back("");//首先插入一个空字符串
+        for(int i=0;i<size;i++)//每个数字都循环一次
+        {
+            vector<string> temp_res;//存储新的结果
+            string s_digits=a[digits[i]-'0'];//s_digits存该数字对应的所有可能字符的字符串
+            int size2=res.size();//所有字符串数
+            int size3=s_digits.length();
+            for(int k=0;k<size3;k++)//循环该数字对应字符次数
+            {
+                for(int j=0;j<size2;j++)//在所有已有字符串后加上字符
+                {
+                    temp_res.push_back(res[j]+s_digits[k]);
+                }
+            }
+            res=temp_res;
+        }
+        return res;
+    }
+};
