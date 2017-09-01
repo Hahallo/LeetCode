@@ -1,0 +1,54 @@
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int size=nums.size();
+        int sum=0;
+        int maxsum=-2147483648;
+        int count=0;
+        for(int i=0;i<size;i++)
+        {
+            if(nums[i]<=0){
+                count++;
+                continue;
+            }
+            else    
+            {
+                sum+=nums[i];
+                for(int l=i+1;l<size;l++)
+                {
+                    if(nums[l]<0)
+                    {
+                        int sum2=0;
+                        for(int j=l;j<size;j++)
+                        {
+                            sum2+=nums[j];
+                            if(sum2>0)
+                            {
+                                sum+=sum2;
+                                l=j;
+                                break;
+                            }
+                            l=j;
+                        }
+                    }
+                    else if(nums[l]>=0)
+                    {
+                        sum+=nums[l];
+                    }
+                }
+            }
+            if(sum>maxsum)
+            {
+                maxsum=sum;    
+            }
+            sum=0;
+        }
+        if(count==size)
+            for(int i=0;i<size;i++)
+            {
+                if(nums[i]>maxsum)
+                    maxsum=nums[i];
+            }
+        return maxsum;
+    }
+};
