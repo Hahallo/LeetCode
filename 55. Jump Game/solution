@@ -1,0 +1,18 @@
+时间复杂度o（n）
+
+class Solution {
+public:
+    bool canJump(vector<int>& nums) {
+        int size=nums.size();
+        int i,temp=size-1;
+        for(i=size-2;i>=0;i--)
+        {
+            if(nums[i]>=(size-i-1)||nums[i]>=(temp-i))
+            {
+                temp=i;
+            }
+            else if(i==0)break;             
+        }
+            return i!=0;
+    }
+};
