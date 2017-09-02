@@ -9,7 +9,7 @@ class Solution {
     }
 };
  
- 改进算法，时间复杂度o（n^2）空间复杂度o(min(m,n))
+动态规划 改进算法，时间复杂度o（n^2）空间复杂度o(min(m,n))
  class Solution {
 public:
     int uniquePaths(int m, int n) {
